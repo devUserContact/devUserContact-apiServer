@@ -17,6 +17,7 @@ const connection = mysql.createConnection({
 
 server.get("/api/test", (req, res) => {
 	connection.query("SELECT * FROM posts", function (err, results, fields) {
+		res.header('Access-Control-Allow-Origin', '*')
 		res.status(200).send(results);
 	});
 });
