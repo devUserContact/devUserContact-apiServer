@@ -25,10 +25,7 @@ server.get("/api/test", (req, res) => {
 				"https://devusercontact-blog.netlify.app"
 			);
 		} else {
-			res.header(
-				"Access-Control-Allow-Origin",
-				"*"
-			);
+			res.header("Access-Control-Allow-Origin", "*");
 		}
 		res.status(200).send(results);
 	});
