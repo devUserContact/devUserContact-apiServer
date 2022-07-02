@@ -24,9 +24,13 @@ server.get("/api/test", (req, res) => {
 				"Access-Control-Allow-Origin",
 				"https://devusercontact-blog.netlify.app"
 			);
+		} else {
+			res.header(
+				"Access-Control-Allow-Origin",
+				"*"
+			);
 		}
 		res.status(200).send(results);
 	});
 });
-
 server.listen(PORT, () => console.log(`listening on port ${PORT}`));
