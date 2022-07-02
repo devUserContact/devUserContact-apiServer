@@ -5,6 +5,8 @@ const mysql = require("mysql2");
 const ENVIRONMENT = process.env.NODE_ENV;
 const PORT = process.env.PORT;
 
+let header = "";
+
 const server = express();
 
 server.use(express.json());
@@ -19,15 +21,14 @@ const connection = mysql.createConnection({
 
 server.get("/api/test", (req, res) => {
 	connection.query("SELECT * FROM posts", function (err, results, fields) {
-		if (ENVIRONMENT === "production") {
-			res.header(
-				"Access-Control-Allow-Origin",
-				"https://devusercontact-blog.netlify.app"
-			);
+		if (ENVIRONMENT === "development") {
+			header = "*";
 		} else {
-			res.header("Access-Control-Allow-Origin", "*");
+			header = "https://devusercontact-blog.netlify.app/";
 		}
+		res.header("Access-Control-Allow-Origin", header);
 		res.status(200).send(results);
 	});
 });
+
 server.listen(PORT, () => console.log(`listening on port ${PORT}`));
