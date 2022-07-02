@@ -2,7 +2,9 @@ require("dotenv").config();
 const express = require("express");
 const mysql = require("mysql2");
 
+const ENVIRONMENT = process.env.NODE_ENV;
 const PORT = process.env.PORT;
+
 const server = express();
 
 server.use(express.json());
@@ -17,7 +19,12 @@ const connection = mysql.createConnection({
 
 server.get("/api/test", (req, res) => {
 	connection.query("SELECT * FROM posts", function (err, results, fields) {
-		res.header('Access-Control-Allow-Origin', 'https://devusercontact-blog.netlify.app')
+		if (ENVIRONMENT === "production") {
+			res.header(
+				"Access-Control-Allow-Origin",
+				"https://devusercontact-blog.netlify.app"
+			);
+		}
 		res.status(200).send(results);
 	});
 });
