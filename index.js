@@ -24,7 +24,7 @@ server.get("/api/posts", (req, res) => {
 		if (ENVIRONMENT === "development") {
 			header = "*";
 		} else {
-			header = "https://devusercontact-blog.netlify.app/";
+			header = "https://devusercontact-blog.netlify.app";
 		}
 		res.header("Access-Control-Allow-Origin", header);
 		res.status(200).send(results);
