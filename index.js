@@ -19,8 +19,8 @@ const connection = mysql.createConnection({
 	database: process.env.DATABASE,
 });
 
-server.get("/api/posts", (req, res) => {
-	connection.query("SELECT * FROM posts", function (err, results, fields) {
+server.get("/api/blog-devusercontact/posts", (req, res) => {
+	connection.query("SELECT * FROM blog_post", function (err, results, fields) {
 		if (ENVIRONMENT === "development") {
 			header = "*";
 		} else {
