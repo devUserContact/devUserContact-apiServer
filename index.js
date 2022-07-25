@@ -6,6 +6,15 @@ const ENVIRONMENT = process.env.NODE_ENV;
 const PORT = process.env.PORT;
 
 let header = "";
+let table = "";
+
+if (ENVIRONMENT === "development") {
+	header = "*";
+	table = "blog_post_TEST";
+} else {
+	header = "https://devusercontact-blog.netlify.app";
+	table = "blog_post";
+}
 
 const server = express();
 
@@ -20,12 +29,7 @@ const connection = mysql.createConnection({
 });
 
 server.get("/api/blog-devusercontact/posts", (req, res) => {
-	connection.query("SELECT * FROM blog_post", function (err, results, fields) {
-		if (ENVIRONMENT === "development") {
-			header = "*";
-		} else {
-			header = "https://devusercontact-blog.netlify.app";
-		}
+	connection.query(`SELECT * FROM ${table}`, function (err, results, fields) {
 		res.header("Access-Control-Allow-Origin", header);
 		res.status(200).send(results);
 	});
