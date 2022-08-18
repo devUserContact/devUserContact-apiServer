@@ -12,7 +12,7 @@ if (ENVIRONMENT === "development") {
 	header = "*";
 	table = "blog_post_TEST";
 } else {
-	header = "https://devusercontact-blog.netlify.app";
+	header = "https://devusercontact.com";
 	table = "blog_post";
 }
 
